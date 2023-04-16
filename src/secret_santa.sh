@@ -5,6 +5,7 @@ sign=null
 vk_user_id=null
 vk_ts=null
 vk_ref=null
+user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36"
 
 function authenticate() {
 	# 1 - sign: (string): <sign>
@@ -28,7 +29,7 @@ function authenticate() {
 function create_game() {
 	curl --request POST \
 		--url "$api/games" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "content-type: application/json" \
 		--header "x-vk-sign: ?$params" \
 		--data '{}'
@@ -40,7 +41,7 @@ function get_game_members() {
 	# 2 - offset: (integer): <offset - default: 0>
 	curl --request GET \
 		--url "$api/members/$1/${2:-100}/${3:-0}?" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "content-type: application/json" \
 		--header "x-vk-sign: ?$params"
 }
@@ -50,7 +51,7 @@ function join_game() {
 	# 2 - wish: (string): <wish>
 	curl --request POST \
 		--url "$api/members" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "content-type: application/json" \
 		--header "x-vk-sign: ?$params" \
 		--data '{
@@ -63,7 +64,7 @@ function leave_game() {
 	# 1 - game_id: (string): <game_id>
 	curl --request DELETE \
 		--url "$api/members/$1/$vk_user_id" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "content-type: application/json" \
 		--header "x-vk-sign: ?$params"
 }
